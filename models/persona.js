@@ -63,13 +63,18 @@ const PersonaSchema = Schema({
         type: String,
         require: true,
         default: 'PERSONA_ROLE'
-    
+    },
+
+    estado: {
+        type: String,
+        require: true,
+        default: 'Activo'
     }
 
 });
 
 PersonaSchema.method('toJSON', function() {
-    const { __v, _id, ...object} = this.toObject();
+    const { __v, _id, clave, ...object} = this.toObject();
     object.uid = _id;
     return object;
 })
