@@ -20,7 +20,6 @@ dbConnection();
 
 //Rutas
 app.use('/api/personas', require('./routes/personas'));
-app.use('/api/empresas', require('./routes/empresas'));
 app.use('/api/login', require('./routes/auth'));
 
 app.listen( 3000, () => {

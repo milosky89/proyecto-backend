@@ -23,22 +23,12 @@ const PersonaSchema = Schema({
         requird: true
     },
 
-    ciudad:{
-        type: String,
-        requird: true
-    },
-
-    direccion:{
-        type: String,
-        requird: true
-    },
-
-    comuna:{
-        type: String,
-        requird: true
-    },
-
     celular:{
+        type: String,
+        requird: true
+    },
+
+    tipoUsuario:{
         type: String,
         requird: true
     },
@@ -62,7 +52,7 @@ const PersonaSchema = Schema({
     role: {
         type: String,
         require: true,
-        default: 'PERSONA_ROLE'
+        default: 'USER_ROLE'
     },
 
     estado: {

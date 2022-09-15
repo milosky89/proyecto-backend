@@ -6,7 +6,7 @@ const { generarJWT } = require('../helpers/jwt');
 //---------------------------------------------
 const getPersonas = async(req,res) => {
 
-    const personas = await Persona.find({}, 'email nombre apellido tipoDocumento numeroDocumento ciudad direccion comuna celular');
+    const personas = await Persona.find({}, 'email nombre apellido tipoDocumento numeroDocumento tipoUsuario celular');
     res.json({
         ok:true,
         personas
