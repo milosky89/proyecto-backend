@@ -68,12 +68,18 @@ const MascotaSchema = Schema({
         required: true,
     },
 
+    estado: {
+        type: String,
+        required: true,
+        default: 'Activo'
+    },
+
     img:{
         type: String,
     },
 
     persona: {
-        required:true,
+        //required:true,
         type: Schema.Types.ObjectId,
         ref:'Persona'
     }

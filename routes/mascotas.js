@@ -19,7 +19,21 @@ router.get('/',validarJWT, getMascotas );
 router.post('/',
     [
         validarJWT,
-        // no funciona el metodo check para la valdiacion
+        /*
+        check('nombreMascota','El nombre de la mascota es obligatorio').not().isEmpty,
+        check('especie','La especie es obligatoria').not().isEmpty(),
+        check('raza','La raza es obligatoria').not().isEmpty(),
+        check('sexo', 'El sexo es obligatorio').not().isEmpty(),
+        check('microChip','El microchip es obligatorio').not().isEmpty(),
+        check('fechaNacimiento','La fecha de nacimiento es obligatorio').not().isEmpty(),
+        check('vacunacion','La vacunacion es obligatoria').not().isEmpty(),
+        check('direccion','La direccion es obligatoria').not().isEmpty(),
+        check('comuna','La comuna es obligatoria').not().isEmpty(),
+        check('esterilizacion','La esterilizacion es obligatoria').not().isEmpty(),
+        check('habita','El habita es obligatorio').not().isEmpty(),
+        check('tipoAlimentacion','El tipo de alimentacion es obligatorio').not().isEmpty(),
+        check('adquisicion','La adquisicion es obligatoria').not().isEmpty(),
+        */
         validarCampos,  
         
     ],
