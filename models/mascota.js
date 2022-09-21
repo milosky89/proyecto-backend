@@ -79,7 +79,7 @@ const MascotaSchema = Schema({
     },
 
     persona: {
-        //required:true,
+        required:true,
         type: Schema.Types.ObjectId,
         ref:'Persona'
     }
