@@ -20,7 +20,10 @@ dbConnection();
 
 //Rutas
 app.use('/api/personas', require('./routes/personas'));
+app.use('/api/mascotas', require('./routes/mascotas'));
 app.use('/api/login', require('./routes/auth'));
+app.use('/api/mail', require('./routes/mail'));
+app.use('/api/resetpass', require('./routes/resetpass'));
 
 app.listen( 3000, () => {
     console.log('Servidor corriendo en puerto'+ 3000);

@@ -5,44 +5,43 @@ const PersonaSchema = Schema({
 
     nombre:{
         type: String,
-        requird: true
+        required: true
     },
 
     apellido:{
         type: String,
-        requird: true
+        required: true
     },
 
     tipoDocumento:{
         type: String,
-        requird: true
+        required: true
     },
 
     numeroDocumento:{
         type: String,
-        requird: true
+        required: true
     },
 
     celular:{
         type: String,
-        requird: true
+        required: true
     },
 
     tipoUsuario:{
         type: String,
-        requird: true
+        required: true
     },
 
     email:{
         type: String,
-        requird: true,
+        required: true,
         unique: true
     },
 
     clave:{
         type: String,
-        requird: true,
-
+        required: true,
     },
 
     img:{
@@ -51,13 +50,13 @@ const PersonaSchema = Schema({
 
     role: {
         type: String,
-        require: true,
+        required: true,
         default: 'USER_ROLE'
     },
 
     estado: {
         type: String,
-        require: true,
+        required: true,
         default: 'Activo'
     }
 

@@ -1,4 +1,5 @@
 /*
+    Personas
     path: /api/personas
 */
 
@@ -6,13 +7,18 @@ const{ Router } = require('express');
 const {check} = require('express-validator');
 const {validarCampos} = require('../middlewares/validar-campos');
 
-const{ getPersonas, creandoPersona, actualizarPersona, borrarPersona } = require('../controllers/personas');
+const{ getPersonas, creandoPersona, actualizarPersona, borrarPersona, contadorUsuarios } = require('../controllers/personas');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
 // Mostrar personas registradas
 router.get('/',validarJWT, getPersonas );
+
+
+router.get('/:tipoUsuario/usuarios', contadorUsuarios );
+
+
 
 //Crar personas
 router.post('/',
@@ -50,5 +56,6 @@ router.put('/:id',
 
 // Eliminar persona
 router.delete('/:id',validarJWT, borrarPersona)
+
 
 module.exports = router;

@@ -13,6 +13,19 @@ const getPersonas = async(req,res) => {
     });
 }
 
+//contador de usuarios
+const contadorUsuarios = async(req,res) => {
+
+    const Personas = await Persona.where({tipoUsuario:{$eq:'Persona'}}).countDocuments();
+    const Empresas = await Persona.where({tipoUsuario:{$eq:'Empresa'}}).countDocuments();
+    const Totales = await Persona.where({tipoUsuario:{$in: ['Empresa','Persona']}}).countDocuments();
+    res.json({
+        Personas,
+        Empresas,
+        Totales
+    });
+}
+
 //--------------------------------------------
 const creandoPersona = async(req,res = response) => {
 
@@ -145,4 +158,6 @@ module.exports = {
     creandoPersona,
     actualizarPersona,
     borrarPersona,
+    contadorUsuarios,
+    
 }
