@@ -10,10 +10,11 @@ const { generarJWT } = require('../helpers/jwt');
 const getMascotas = async(req,res) => {
 
     //const mascotas = await Mascotas.find({}, 'nombreMascota especie raza sexo microchip fechaNacimiento vacunacion direccion comuna esterilizacion habita tipoAlimentacion adquisicion');
+    const mascotas = await Mascotas.find()
+                                .populate('persona','nombre apellido img');
     res.json({
         ok:true,
-        msg: 'GetMascotas'
-        //mascotas
+        mascotas
     });
 }
 //--------------------------------------------
