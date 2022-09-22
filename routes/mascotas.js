@@ -19,8 +19,7 @@ router.get('/',validarJWT, getMascotas );
 router.post('/',
     [
         validarJWT,
-        /*
-        check('nombreMascota','El nombre de la mascota es obligatorio').not().isEmpty,
+        check('nombreMascota','El nombre de la mascota es obligatorio').not().isEmpty(),
         check('especie','La especie es obligatoria').not().isEmpty(),
         check('raza','La raza es obligatoria').not().isEmpty(),
         check('sexo', 'El sexo es obligatorio').not().isEmpty(),
@@ -32,8 +31,8 @@ router.post('/',
         check('esterilizacion','La esterilizacion es obligatoria').not().isEmpty(),
         check('habita','El habita es obligatorio').not().isEmpty(),
         check('tipoAlimentacion','El tipo de alimentacion es obligatorio').not().isEmpty(),
-        check('adquisicion','La adquisicion es obligatoria').not().isEmpty(), */
-        validarCampos,  
+        check('adquisicion','La adquisicion es obligatoria').not().isEmpty(),
+        validarCampos, 
     ],
     crearMascota );
 
