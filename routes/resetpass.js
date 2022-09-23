@@ -12,12 +12,14 @@ const Persona = require('../models/persona');
 //Rutas
 router.put('/a', mdAutenticacion.validarJWT, async (req, res) => {
  
+    
  
-    var body = req.body;
-    var token = req.query.token;
-    var token = req.rawHeaders[1];
+    let body = req.body;
+    let token = req.get('x-token');
+    
  
- 
+    console.log(body);
+    console.log(token)
  
     var decoded = jwt_decode(token);
     var email = decoded.to;

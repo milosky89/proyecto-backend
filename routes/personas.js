@@ -7,7 +7,7 @@ const{ Router } = require('express');
 const {check} = require('express-validator');
 const {validarCampos} = require('../middlewares/validar-campos');
 
-const{ getPersonas, creandoPersona, actualizarPersona, borrarPersona, contadorUsuarios } = require('../controllers/personas');
+const{ getPersonas, creandoPersona, actualizarPersona, borrarPersona, contadorUsuarios,getPersona } = require('../controllers/personas');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
@@ -16,6 +16,11 @@ const router = Router();
 router.get('/',validarJWT, getPersonas );
 
 
+// Mostrar persona registrada
+router.get('/:email', getPersona );
+
+
+// cantidad de usuarios registrados
 router.get('/:tipoUsuario/usuarios', contadorUsuarios );
 
 

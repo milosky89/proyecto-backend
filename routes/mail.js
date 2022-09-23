@@ -58,8 +58,8 @@ app.post('/cambiarPassword', (req, res) => {
     const mailOptions = {
         from: 'camilolopera1@gmail.com', // sender address
         to: `${body.to}`, // list of receivers
-        subject: 'Paso hp Hello ✔', // Subject line
-        text: 'malparido', // plain text body:
+        subject: ' Hello ✔', // Subject line
+        text: '', // plain text body:
         html: `<table cellspacing="0" cellpadding="0" border="0" style="color:#333;background:#fff;padding:0;margin:0;width:100%;font:15px/1.25em 'Helvetica Neue',Arial,Helvetica"> <tbody><tr width="100%"> <td valign="top" align="left" style="background:#eef0f1;font:15px/1.25em 'Helvetica Neue',Arial,Helvetica"> <table style="border:none;padding:0 18px;margin:50px auto;width:500px"> <tbody> <tr width="100%" height="60"> 
         <td valign="top" align="left" style="border-top-left-radius:4px;border-top-right-radius:4px;background:#27709b;padding:10px 18px;text-align:center"> 
            </td> </tr> <tr width="100%"> <td valign="top" align="left" style="background:#fff;padding:18px">
@@ -71,10 +71,10 @@ app.post('/cambiarPassword', (req, res) => {
        <div style="background:#f6f7f8;border-radius:3px"> <br>
       
       
-       <p style="font:15px/1.25em 'Helvetica Neue',Arial,Helvetica;margin-bottom:0;text-align:center"> <a href="http://localhost:4200/#/reset/${token}" style="border-radius:3px;background:#3aa54c;color:#fff;display:block;font-weight:700;font-size:16px;line-height:1.25em;margin:24px auto 6px;padding:10px 18px;text-decoration:none;width:180px" target="_blank"> Recuperar contraseña</a> </p>
+       <p style="font:15px/1.25em 'Helvetica Neue',Arial,Helvetica;margin-bottom:0;text-align:center"> <a href="http://localhost:4200/nuevaClave/${token}" style="border-radius:3px;background:#3aa54c;color:#fff;display:block;font-weight:700;font-size:16px;line-height:1.25em;margin:24px auto 6px;padding:10px 18px;text-decoration:none;width:180px" target="_blank"> Recuperar contraseña</a> </p>
          
          <p style="font:11px/1.25em 'Helvetica Neue',Arial,Helvetica;color:#333;text-align:center"> Si tienes problemas con el botón, copia y pega el siguiente enlace en tu navegador: <br><br>
-           http://localhost:4200/#/reset/${token}
+           http://localhost:4200/nuevaClave/${token}
          </p>
       
        <br><br> </div>
@@ -106,17 +106,10 @@ app.post('/cambiarPassword', (req, res) => {
             ok: true,
             message: 'paso el hpEl correo fue enviado correctamente',
             token: token
-        });
- 
-         
+        });        
     });
         }
-    });
- 
- 
-
-   
- 
+    });   
 })
  
 module.exports = app;

@@ -4,12 +4,25 @@ const bcrypt = require('bcryptjs');
 const Persona = require('../models/persona');
 const { generarJWT } = require('../helpers/jwt');
 //---------------------------------------------
+
+//Trae todas las personas
 const getPersonas = async(req,res) => {
 
     const personas = await Persona.find({}, 'email nombre apellido tipoDocumento numeroDocumento tipoUsuario celular');
     res.json({
         ok:true,
         personas
+    });
+}
+
+//Trae una sola persona
+const getPersona = async(req,res) => {
+
+    const email = req.params.email;
+    const persona = await Persona.findOne({email});
+    res.json({
+        ok:true,
+        persona
     });
 }
 
@@ -159,5 +172,6 @@ module.exports = {
     actualizarPersona,
     borrarPersona,
     contadorUsuarios,
+    getPersona
     
 }
