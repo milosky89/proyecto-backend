@@ -71,7 +71,7 @@ const MascotaSchema = Schema({
     estado: {
         type: String,
         required: true,
-        default: 'Activo'
+        default: 'Vivo'
     },
 
     img:{

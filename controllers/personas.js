@@ -8,10 +8,19 @@ const { generarJWT } = require('../helpers/jwt');
 //Trae todas las personas
 const getPersonas = async(req,res) => {
 
-    const personas = await Persona.find({}, 'email nombre apellido tipoDocumento numeroDocumento tipoUsuario celular');
+    const desde = Number(req.query.desde) || 0;
+
+    const [personas, total] = await Promise.all([
+        Persona.find({}, 'email nombre apellido tipoDocumento numeroDocumento tipoUsuario celular')
+                                .skip(desde)
+                                .limit(7),
+        Persona.count()
+    ]);
+
     res.json({
         ok:true,
-        personas
+        personas,
+        total
     });
 }
 

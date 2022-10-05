@@ -19,6 +19,8 @@ router.get('/',validarJWT, getPersonas );
 // Mostrar persona registrada
 router.get('/:email', getPersona );
 
+router.get('/perfil/:email',validarJWT, getPersona );
+
 
 // cantidad de usuarios registrados
 router.get('/:tipoUsuario/usuarios', contadorUsuarios );

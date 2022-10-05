@@ -21,6 +21,7 @@ dbConnection();
 //Rutas
 app.use('/api/personas', require('./routes/personas'));
 app.use('/api/mascotas', require('./routes/mascotas'));
+app.use('/api/todo', require('./routes/busquedas'));
 app.use('/api/login', require('./routes/auth'));
 app.use('/api/mail', require('./routes/mail'));
 app.use('/api/resetpass', require('./routes/resetpass'));

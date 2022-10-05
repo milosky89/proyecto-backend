@@ -39,13 +39,13 @@ router.put('/a', mdAutenticacion.validarJWT, async (req, res) => {
             });
         }
  
-        /*if (!personaDB) {
+        if (!personaDB) {
             return res.status(400).json({
                 ok: false,
                 mensaje: 'Credenciales Incorrectas - email',
                 errors: err
             });
-        }*/
+        }
         personaDB.clave = persona.clave;
         const {clave, ...campos} = personaDB;
         campos.clave = persona.clave

@@ -58,7 +58,7 @@ app.post('/cambiarPassword', (req, res) => {
     const mailOptions = {
         from: 'camilolopera1@gmail.com', // sender address
         to: `${body.to}`, // list of receivers
-        subject: ' Hello ✔', // Subject line
+        subject: ' Cambio de contraseña ✔', // Subject line
         text: '', // plain text body:
         html: `<table cellspacing="0" cellpadding="0" border="0" style="color:#333;background:#fff;padding:0;margin:0;width:100%;font:15px/1.25em 'Helvetica Neue',Arial,Helvetica"> <tbody><tr width="100%"> <td valign="top" align="left" style="background:#eef0f1;font:15px/1.25em 'Helvetica Neue',Arial,Helvetica"> <table style="border:none;padding:0 18px;margin:50px auto;width:500px"> <tbody> <tr width="100%" height="60"> 
         <td valign="top" align="left" style="border-top-left-radius:4px;border-top-right-radius:4px;background:#27709b;padding:10px 18px;text-align:center"> 
