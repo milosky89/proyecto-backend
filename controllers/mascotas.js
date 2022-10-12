@@ -45,23 +45,75 @@ const crearMascota = async(req,res = response) => {
     }  
 }
 //--------------------------------------------
-const actualizarMascota = async(req,res) => {
+const actualizarMascota = async(req,res = response) => {
 
-    res.json({
-        ok:true,
-        msg: 'Actualizar mascotas'
-        //mascotas
-    });
+    const id = req.params.id;
+    const _id = req._id;
+    try {
+
+        const mascota = await Mascotas.findById(id);
+
+        if(!mascota){
+          return res.status(404).json({
+                ok:true,
+                msg: 'Mascota no encontrada por Id',
+            });
+        }
+
+        const cambiosMascota = {
+            ...req.body,
+            persona: _id
+        }
+
+        const mascotaActualizado = await Mascotas.findByIdAndUpdate(id, cambiosMascota, {new: true});
+
+
+        res.json({
+            ok:true,
+            Mascota: mascotaActualizado
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado.. revisar log'
+        })
+    }
+
+    
 }
 //--------------------------------------------
 
 const eliminarMascota = async(req,res) => {
 
-    res.json({
-        ok:true,
-        msg: 'eliminar mascotas'
-        //mascotas
-    });
+    const id = req.params.id;
+  
+    try {
+
+        const mascota = await Mascotas.findById(id);
+
+        if(!mascota){
+          return res.status(404).json({
+                ok:true,
+                msg: 'Mascota no encontrada por Id',
+            });
+        }
+
+        await Mascotas.findByIdAndDelete(id)
+        res.json({
+            ok:true,
+            msg: 'Mascota eliminada'
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado.. revisar log'
+        })
+    }
+
 }
 
 

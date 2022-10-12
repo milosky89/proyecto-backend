@@ -40,8 +40,8 @@ router.post('/',
 // Modificar mascota creada
 router.put('/:id',
     [
-        /*
-        check('nombreMascota','El nombre de la mascota es obligatorio').not().isEmpty,
+        validarJWT,
+        check('nombreMascota','El nombre de la mascota es obligatorio').not().isEmpty(),
         check('especie','La especie es obligatoria').not().isEmpty(),
         check('raza','La raza es obligatoria').not().isEmpty(),
         check('sexo', 'El sexo es obligatorio').not().isEmpty(),
@@ -55,12 +55,12 @@ router.put('/:id',
         check('tipoAlimentacion','El tipo de alimentacion es obligatorio').not().isEmpty(),
         check('adquisicion','La adquisicion es obligatoria').not().isEmpty(),
         validarCampos,
-        */
+        
     ],
     actualizarMascota
 );
 
 // Eliminar mascota
-router.delete('/:id', eliminarMascota)
+router.delete('/:id',validarJWT, eliminarMascota)
 
 module.exports = router;
