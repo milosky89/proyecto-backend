@@ -15,8 +15,8 @@ const router = Router();
 // Mostrar mascotas registradas
 router.get('/',validarJWT, getMascotas );
 
-// cantidad de usuarios registrados
-router.get('/:especie/', contadorMascotas );
+// cantidad de mascotas registrados
+router.get('/:especie', contadorMascotas );
 
 //Crear mascota
 router.post('/',
