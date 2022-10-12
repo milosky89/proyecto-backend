@@ -19,6 +19,22 @@ const getMascotas = async(req,res) => {
 }
 //--------------------------------------------
 
+//contador de mascotas
+const contadorMascotas = async(req,res) => {
+
+    const perro = await Mascotas.where({especie:{$eq:'Perro'}}).countDocuments();
+    const gato = await Mascotas.where({especie:{$eq:'Gato'}}).countDocuments();
+    const total = await Mascotas.where({especie:{$in: ['Perro','Gato']}}).countDocuments();
+    res.json({
+        perro,
+        gato,
+        total
+    });
+}
+
+
+//--------------------------------------------
+
 const crearMascota = async(req,res = response) => {
 
     const uid = req.uid;
@@ -121,5 +137,6 @@ module.exports = {
     getMascotas,
     crearMascota,
     actualizarMascota,
-    eliminarMascota
+    eliminarMascota,
+    contadorMascotas
 }
