@@ -11,10 +11,10 @@ const getPersonas = async(req,res) => {
     const desde = Number(req.query.desde) || 0;
 
     const [personas, total] = await Promise.all([
-        Persona.find({}, 'email nombre apellido tipoDocumento numeroDocumento tipoUsuario celular')
+        Persona.find({}, 'email nombre apellido tipoDocumento numeroDocumento tipoUsuario celular img')
                                 .skip(desde)
                                 .limit(7),
-        Persona.count()
+        Persona.countDocuments()
     ]);
 
     res.json({
