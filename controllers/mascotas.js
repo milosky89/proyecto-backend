@@ -32,6 +32,17 @@ const contadorMascotas = async(req,res) => {
     });
 }
 
+//--------------------------------------------
+const contadorMascotasId = async (req, res) => {
+    const uid = req.params.id;
+    const perros = await Mascotas.where({ persona: { _id: uid }, especie: { $eq: 'Perro' } }).countDocuments();
+    const gatos = await Mascotas.where({ persona: { _id: uid }, especie: { $eq: 'Gato' } }).countDocuments();
+
+    res.json({
+        perros,
+        gatos
+    });
+}
 
 //--------------------------------------------
 
@@ -138,5 +149,6 @@ module.exports = {
     crearMascota,
     actualizarMascota,
     eliminarMascota,
-    contadorMascotas
+    contadorMascotas,
+    contadorMascotasId
 }

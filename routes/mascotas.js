@@ -7,7 +7,7 @@ const{ Router } = require('express');
 const {check} = require('express-validator');
 const {validarCampos} = require('../middlewares/validar-campos');
 
-const { getMascotas,crearMascota,actualizarMascota,eliminarMascota, contadorMascotas} = require('../controllers/mascotas');
+const { getMascotas,crearMascota,actualizarMascota,eliminarMascota, contadorMascotas, contadorMascotasId} = require('../controllers/mascotas');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
@@ -17,6 +17,9 @@ router.get('/',validarJWT, getMascotas );
 
 // cantidad de mascotas registrados
 router.get('/:especie', contadorMascotas );
+
+// mascotas por usuario
+router.get('/count/:id', contadorMascotasId );
 
 //Crear mascota
 router.post('/',
