@@ -33,7 +33,7 @@ const getDocumentosColeccion = async(req, res = response)=>{
     switch (tabla) {
         case 'mascotas':
              data = await Mascota.find({nombreMascota: regx})
-                                 .populate('persona','nombre apellido img');        
+                                 .populate('persona','nombre apellido celular img');        
             break;
 
         case 'personas':

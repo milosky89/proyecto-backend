@@ -64,6 +64,12 @@ const creandoPersona = async(req,res = response) => {
         
         const persona = new Persona(req.body)
 
+        if(persona.tipoUsuario == 'Persona'){
+            persona.role = 'USER_ROLE'
+        }else{
+            persona.role = 'EMPRESA_ROLE'
+        }
+
         // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
         persona.clave = bcrypt.hashSync(clave, salt);

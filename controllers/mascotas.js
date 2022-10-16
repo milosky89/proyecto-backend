@@ -1,4 +1,4 @@
-const {response, json} = require('express');
+const { response, json } = require('express');
 const bcrypt = require('bcryptjs');
 
 const Mascotas = require('../models/mascota');
@@ -6,25 +6,59 @@ const { generarJWT } = require('../helpers/jwt');
 
 
 
-//---------------------------------------------
-const getMascotas = async(req,res) => {
 
+//---------------------------------------------
+const getMascotas = async (req, res) => {
+
+    const desde = Number(req.query.desde) || 0;
     //const mascotas = await Mascotas.find({}, 'nombreMascota especie raza sexo microchip fechaNacimiento vacunacion direccion comuna esterilizacion habita tipoAlimentacion adquisicion');
-    const mascotas = await Mascotas.find()
-                                .populate('persona','nombre apellido img');
+    const [mascotas, total] = await Promise.all([
+        Mascotas.find({}, 'nombreMascota especie raza sexo microchip fechaNacimiento vacunacion direccion comuna esterilizacion habita tipoAlimentacion adquisicion estado img')
+            .skip(desde)
+            .limit(10)
+            .populate('persona', 'nombre apellido celular img'),
+        Mascotas.countDocuments()
+    ])
     res.json({
-        ok:true,
+        ok: true,
+        mascotas,
+        total
+    });
+}
+//--------------------------------------------
+
+const mascotasUsuario = async (req, res) => {
+
+    const uid  = req.params.id;
+    const mascotas = await Mascotas.where({persona: uid});
+    res.json({
+        ok: true,
         mascotas
     });
 }
 //--------------------------------------------
 
-//contador de mascotas
-const contadorMascotas = async(req,res) => {
+const mascotasId = async (req, res) => {
 
-    const perro = await Mascotas.where({especie:{$eq:'Perro'}}).countDocuments();
-    const gato = await Mascotas.where({especie:{$eq:'Gato'}}).countDocuments();
-    const total = await Mascotas.where({especie:{$in: ['Perro','Gato']}}).countDocuments();
+    const uid  = req.params.id;
+    const mascota = await Mascotas.where({_id: uid});
+    res.json({
+        ok: true,
+        mascota
+    });
+}
+
+
+
+
+//--------------------------------------------
+
+//contador de mascotas
+const contadorMascotas = async (req, res) => {
+
+    const perro = await Mascotas.where({ especie: { $eq: 'Perro' } }).countDocuments();
+    const gato = await Mascotas.where({ especie: { $eq: 'Gato' } }).countDocuments();
+    const total = await Mascotas.where({ especie: { $in: ['Perro', 'Gato'] } }).countDocuments();
     res.json({
         perro,
         gato,
@@ -46,7 +80,7 @@ const contadorMascotasId = async (req, res) => {
 
 //--------------------------------------------
 
-const crearMascota = async(req,res = response) => {
+const crearMascota = async (req, res = response) => {
 
     const uid = req.uid;
     const mascota = new Mascotas({
@@ -55,12 +89,12 @@ const crearMascota = async(req,res = response) => {
     });
 
     try {
-        
-        const mascotaDB =await mascota.save();
+
+        const mascotaDB = await mascota.save();
 
         res.json({
-            ok:true,
-            mascota:mascotaDB
+            ok: true,
+            mascota: mascotaDB
         });
 
     } catch (error) {
@@ -69,10 +103,10 @@ const crearMascota = async(req,res = response) => {
             ok: false,
             msg: 'Error inesperado.. revisar log'
         })
-    }  
+    }
 }
 //--------------------------------------------
-const actualizarMascota = async(req,res = response) => {
+const actualizarMascota = async (req, res = response) => {
 
     const id = req.params.id;
     const _id = req._id;
@@ -80,9 +114,9 @@ const actualizarMascota = async(req,res = response) => {
 
         const mascota = await Mascotas.findById(id);
 
-        if(!mascota){
-          return res.status(404).json({
-                ok:true,
+        if (!mascota) {
+            return res.status(404).json({
+                ok: true,
                 msg: 'Mascota no encontrada por Id',
             });
         }
@@ -92,11 +126,11 @@ const actualizarMascota = async(req,res = response) => {
             persona: _id
         }
 
-        const mascotaActualizado = await Mascotas.findByIdAndUpdate(id, cambiosMascota, {new: true});
+        const mascotaActualizado = await Mascotas.findByIdAndUpdate(id, cambiosMascota, { new: true });
 
 
         res.json({
-            ok:true,
+            ok: true,
             Mascota: mascotaActualizado
         });
 
@@ -108,28 +142,28 @@ const actualizarMascota = async(req,res = response) => {
         })
     }
 
-    
+
 }
 //--------------------------------------------
 
-const eliminarMascota = async(req,res) => {
+const eliminarMascota = async (req, res) => {
 
     const id = req.params.id;
-  
+
     try {
 
         const mascota = await Mascotas.findById(id);
 
-        if(!mascota){
-          return res.status(404).json({
-                ok:true,
+        if (!mascota) {
+            return res.status(404).json({
+                ok: true,
                 msg: 'Mascota no encontrada por Id',
             });
         }
 
         await Mascotas.findByIdAndDelete(id)
         res.json({
-            ok:true,
+            ok: true,
             msg: 'Mascota eliminada'
         });
 
@@ -150,5 +184,7 @@ module.exports = {
     actualizarMascota,
     eliminarMascota,
     contadorMascotas,
-    contadorMascotasId
+    contadorMascotasId,
+    mascotasUsuario,
+    mascotasId
 }

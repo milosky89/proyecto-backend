@@ -13,7 +13,7 @@ const MascotaSchema = Schema({
         required: true
     },
 
-    raza:{
+    caracteristica:{
         type: String,
         required: true
     },
@@ -28,8 +28,8 @@ const MascotaSchema = Schema({
         required: true
     },
 
-    fechaNacimiento:{
-        type: String,
+    edad:{
+        type: Number,
         required: true,
     },
 
@@ -71,7 +71,6 @@ const MascotaSchema = Schema({
     estado: {
         type: String,
         required: true,
-        default: 'Vivo'
     },
 
     img:{
