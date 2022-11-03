@@ -13,7 +13,7 @@ const getMascotas = async (req, res) => {
     const desde = Number(req.query.desde) || 0;
     //const mascotas = await Mascotas.find({}, 'nombreMascota especie raza sexo microchip fechaNacimiento vacunacion direccion comuna esterilizacion habita tipoAlimentacion adquisicion');
     const [mascotas, total] = await Promise.all([
-        Mascotas.find({}, 'nombreMascota especie raza sexo microchip fechaNacimiento vacunacion direccion comuna esterilizacion habita tipoAlimentacion adquisicion estado img')
+        Mascotas.find({}, 'nombreMascota especie caracteristica sexo microchip fechaNacimiento vacunacion direccion comuna esterilizacion habita tipoAlimentacion adquisicion estado img')
             .skip(desde)
             .limit(10)
             .populate('persona', 'nombre apellido celular img'),
