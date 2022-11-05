@@ -151,6 +151,136 @@ const getDatas = async (req, res = response) => {
     }
 }
 
-module.exports = {
-    getDatas
+// Funcion nueva
+
+const getData = async (req, res = response) => {
+
+    const consulta = req.query.consulta
+    var comunas = [];
+    var comunaR = []
+    var query = { comuna: /^Comuna/ };
+    const perroxcomunaT = await Mascota.find(query)
+    perroxcomunaT.forEach(element => {
+        const result = element.comuna
+        comunas.push(result)
+    });
+    let filtroComunas = comunas.filter((item, index) => {
+        return comunas.indexOf(item) === index;
+    })
+    const resultado = []
+    switch (consulta) {
+        
+        case 'Tipo de mascota':
+            
+            for (var i = 0; i < filtroComunas.length; i++) {
+                const perro = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i] }).countDocuments();
+                const gato = await Mascota.find({especie: 'Gato', comuna: filtroComunas[i] }).countDocuments();
+                resultado.push({ comuna: filtroComunas[i], perro: perro, gato: gato })
+              
+            }
+            res.json(
+                resultado
+            );
+            break;
+
+        case 'Sexo':
+            
+            for (var i = 0; i < filtroComunas.length; i++) {
+                const perroM = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], sexo: 'Macho' }).countDocuments();
+                const perroH = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], sexo: 'Hembra' }).countDocuments();
+                const gatoM = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], sexo: 'Macho' }).countDocuments();
+                const gatoH = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], sexo: 'Hembra' }).countDocuments();
+                resultado.push({ comuna: filtroComunas[i], perroM: perroM, perroH: perroH, gatoM: gatoM, gatoH: gatoH })
+
+            }
+            res.json(
+                resultado
+            );
+            break;
+        case 'Adquisición':
+            
+            for (var i = 0; i < filtroComunas.length; i++) {
+                const perroC = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], adquisicion: 'Compra' }).countDocuments();
+                const perroA = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], adquisicion: 'Adopción' }).countDocuments();
+                const gatoC = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], adquisicion: 'Compra' }).countDocuments();
+                const gatoA = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], adquisicion: 'Adopción' }).countDocuments();
+                resultado.push({ comuna: filtroComunas[i], perroC: perroC, perroA: perroA, gatoC: gatoC, gatoA: gatoA })
+
+            }
+            res.json(
+                resultado
+            );
+            break;
+        case 'Esterilización':
+            
+            for (var i = 0; i < filtroComunas.length; i++) {
+                const perroS = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], esterilizacion: 'Si' }).countDocuments();
+                const perroN = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], esterilizacion: 'No' }).countDocuments();
+                const gatoS = await Mascota.find({especie: 'Gato', comuna: filtroComunas[i], esterilizacion: 'Si' }).countDocuments();
+                const gatoN = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], esterilizacion: 'No' }).countDocuments();
+                resultado.push({ comuna: filtroComunas[i], perroS: perroS, perroN: perroN, gatoS: gatoS, gatoN: gatoN })
+
+            }
+            res.json(
+                resultado
+            );
+            break;
+        case 'Esquema de vacunación':
+           
+            for (var i = 0; i < filtroComunas.length; i++) {
+                const perroS = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], vacunacion: 'Si' }).countDocuments();
+                const perroN = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], vacunacion: 'No' }).countDocuments();
+                const gatoS = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], vacunacion: 'Si' }).countDocuments();
+                const gatoN = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], vacunacion: 'No' }).countDocuments();
+                resultado.push({ comuna: filtroComunas[i], perroS: perroS, perroN: perroN, gatoS: gatoS, gatoN: gatoN })
+
+            }
+            res.json(
+                resultado
+            );
+            break;
+        case 'Tipo de Alimentación':
+           
+            for (var i = 0; i < filtroComunas.length; i++) {
+                const perroCO = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], tipoAlimentacion: 'Concentrado' }).countDocuments();
+                const perroCA = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], tipoAlimentacion: 'Casero' }).countDocuments();
+                const gatoCO = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], tipoAlimentacion: 'Concentrado' }).countDocuments();
+                const gatoCA = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], tipoAlimentacion: 'Casero' }).countDocuments();
+                resultado.push({ comuna: filtroComunas[i], perroCO: perroCO, perroCA: perroCA, gatoCO: gatoCO, gatoCA: gatoCA })
+            }
+            
+            res.json(
+                resultado
+            );
+            break;
+
+            case 'Estado actual':
+           
+            for (var i = 0; i < filtroComunas.length; i++) {
+                const perroVivo = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], estado: 'Vivo' }).countDocuments();
+                const perroMuerto = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], estado: 'Muerto' }).countDocuments();
+                const perroPerdido = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], estado: 'Perdido' }).countDocuments();
+                const perroAdopcion = await Mascota.find({ especie: 'Perro', comuna: filtroComunas[i], estado: 'En Adopción' }).countDocuments();
+                const gatoVivo = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], estado: 'Vivo' }).countDocuments();
+                const gatoMuerto = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], estado: 'Muerto' }).countDocuments();
+                const gatoPerdido = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], estado: 'Perdido' }).countDocuments();
+                const gatoAdopcion = await Mascota.find({ especie: 'Gato', comuna: filtroComunas[i], estado: 'En Adopción' }).countDocuments();
+                resultado.push({ comuna: filtroComunas[i], perroVivo: perroVivo, perroMuerto: perroMuerto, perroPerdido: perroPerdido, perroAdopcion: perroAdopcion,
+                                                            gatoVivo: gatoVivo, gatoMuerto: gatoMuerto, gatoPerdido: gatoPerdido, gatoAdopcion: gatoAdopcion  })
+            }
+            
+            res.json(
+                resultado
+            );
+            break;
+
+        default:
+            console.log(`Sorry, we are out of ${consulta}.`);
+    }
 }
+module.exports = {
+    getDatas,
+    getData
+}
+
+
