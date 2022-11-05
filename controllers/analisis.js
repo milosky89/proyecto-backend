@@ -6,7 +6,7 @@ const mascota = require('../models/mascota');
 
 
 
-// funcion utilizada
+// funcion Graficas de pie
 
 const getDatas = async (req, res = response) => {
     const comuna = req.query.comuna
@@ -15,12 +15,12 @@ const getDatas = async (req, res = response) => {
         case 'Tipo de mascota':
             const perro = await Mascota.find({ especie: 'Perro', comuna: comuna }).countDocuments();
             const gato = await Mascota.find({ especie: 'Gato', comuna: comuna }).countDocuments();
-            const totalMascotas = await Mascota.where({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna }).countDocuments();
+            //const totalMascotas = await Mascota.where({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna }).countDocuments();
 
             res.json({
                 perro,
                 gato,
-                totalMascotas
+               // totalMascotas
             });
             break;
         case 'Tipo de Alimentación':
@@ -42,9 +42,9 @@ const getDatas = async (req, res = response) => {
                 gatoCO,
                 gatoCA,
                 gatoMi,
-                totalConcentrado,
-                totalCasero,
-                totalmixto
+                //totalConcentrado,
+                //totalCasero,
+                //totalmixto
                 
             });
             break;
@@ -62,8 +62,8 @@ const getDatas = async (req, res = response) => {
                 perroH,
                 gatoM,
                 gatoH,
-                totalMascotaMacho,
-                totalMascotaHembra
+                //totalMascotaMacho,
+                //totalMascotaHembra
             });
             break;
         case 'Adquisición':
@@ -79,8 +79,8 @@ const getDatas = async (req, res = response) => {
                 perroA,
                 gatoC,
                 gatoA,
-                totalMascotaCompra,
-                totalMascotaAdopcion
+                //totalMascotaCompra,
+                //totalMascotaAdopcion
             });
             break;
         case 'Esterilización':
@@ -97,8 +97,8 @@ const getDatas = async (req, res = response) => {
                 perroN,
                 gatoS,
                 gatoN,
-                totalMascotaEste,
-                totalMascotaNOEste
+                //totalMascotaEste,
+                //totalMascotaNOEste
             });
             break;
         case 'Esquema de vacunación':
@@ -115,8 +115,8 @@ const getDatas = async (req, res = response) => {
                 perroNo,
                 gatoSi,
                 gatoNo,
-                totalMascotaVacuna,
-                totalMascotaNOVacuna
+                //totalMascotaVacuna,
+                //totalMascotaNOVacuna
 
             });
             break;
@@ -143,7 +143,7 @@ const getDatas = async (req, res = response) => {
                 gatoF,
                 gatoP,
                 gatoAd,
-                totalMascotaVivas,totalMascotaMuertas,totalMascotaperdidas,totalMascotaEnAdopcion
+                //totalMascotaVivas,totalMascotaMuertas,totalMascotaperdidas,totalMascotaEnAdopcion
             });
             break;
         default:
