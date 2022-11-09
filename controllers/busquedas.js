@@ -6,9 +6,7 @@ const Mascota = require('../models/mascota')
 const getBusquedaTodo = async(req, res = response)=>{
 
     const busqueda = req.params.busqueda;
-    const regx = new RegExp(busqueda, 'i');
-
-    
+    const regx = new RegExp(busqueda, 'i');  
     
     const [persona,mascota] = await Promise.all([ 
           Persona.find({nombre: regx}),
@@ -53,7 +51,6 @@ const getDocumentosColeccion = async(req, res = response)=>{
         resultados: data
     })
 }
-
 
 
 module.exports = {

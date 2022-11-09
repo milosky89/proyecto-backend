@@ -1,9 +1,6 @@
 const { response } = require('express');
 
-const Persona = require('../models/persona')
 const Mascota = require('../models/mascota');
-const mascota = require('../models/mascota');
-
 
 
 // funcion Graficas de pie
@@ -15,12 +12,10 @@ const getDatas = async (req, res = response) => {
         case 'Tipo de mascota':
             const perro = await Mascota.find({ especie: 'Perro', comuna: comuna }).countDocuments();
             const gato = await Mascota.find({ especie: 'Gato', comuna: comuna }).countDocuments();
-            //const totalMascotas = await Mascota.where({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna }).countDocuments();
 
             res.json({
                 perro,
                 gato,
-               // totalMascotas
             });
             break;
         case 'Tipo de Alimentación':
@@ -30,10 +25,6 @@ const getDatas = async (req, res = response) => {
             const gatoCO = await Mascota.find({ especie: 'Gato', comuna: comuna, tipoAlimentacion: 'Concentrado' }).countDocuments();
             const gatoCA = await Mascota.find({ especie: 'Gato', comuna: comuna, tipoAlimentacion: 'Casero' }).countDocuments();
             const gatoMi = await Mascota.find({ especie: 'Gato', comuna: comuna, tipoAlimentacion: 'Mixto' }).countDocuments();
-
-            const totalConcentrado = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({tipoAlimentacion: 'Concentrado'}).countDocuments();
-            const totalCasero = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({tipoAlimentacion: 'Casero'}).countDocuments();
-            const totalmixto = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({tipoAlimentacion: 'Mixto'}).countDocuments();
             
             res.json({
                 perro_concentrado,
@@ -42,10 +33,6 @@ const getDatas = async (req, res = response) => {
                 gatoCO,
                 gatoCA,
                 gatoMi,
-                //totalConcentrado,
-                //totalCasero,
-                //totalmixto
-                
             });
             break;
         case 'Sexo':
@@ -54,16 +41,11 @@ const getDatas = async (req, res = response) => {
             const gatoM = await Mascota.find({ especie: 'Gato', comuna: comuna, sexo: 'Macho' }).countDocuments();
             const gatoH = await Mascota.find({ especie: 'Gato', comuna: comuna, sexo: 'Hembra' }).countDocuments();
 
-            const totalMascotaMacho = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({sexo: 'Macho'}).countDocuments();
-            const totalMascotaHembra = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({sexo: 'Hembra'}).countDocuments();
-
             res.json({
                 perroM,
                 perroH,
                 gatoM,
                 gatoH,
-                //totalMascotaMacho,
-                //totalMascotaHembra
             });
             break;
         case 'Adquisición':
@@ -72,15 +54,11 @@ const getDatas = async (req, res = response) => {
             const gatoC = await Mascota.find({ especie: 'Gato', comuna: comuna, adquisicion: 'Compra' }).countDocuments();
             const gatoA = await Mascota.find({ especie: 'Gato', comuna: comuna, adquisicion: 'Adopción' }).countDocuments();
 
-            const totalMascotaCompra = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({adquisicion: 'Compra'}).countDocuments();
-            const totalMascotaAdopcion = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({adquisicion: 'Adopción'}).countDocuments();
             res.json({
                 perroC,
                 perroA,
                 gatoC,
                 gatoA,
-                //totalMascotaCompra,
-                //totalMascotaAdopcion
             });
             break;
         case 'Esterilización':
@@ -89,16 +67,11 @@ const getDatas = async (req, res = response) => {
             const gatoS = await Mascota.find({ especie: 'Gato', comuna: comuna, esterilizacion: 'Si' }).countDocuments();
             const gatoN = await Mascota.find({ especie: 'Gato', comuna: comuna, esterilizacion: 'No' }).countDocuments();
 
-            const totalMascotaEste = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({esterilizacion: 'Si'}).countDocuments();
-            const totalMascotaNOEste = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({esterilizacion: 'No'}).countDocuments();
-
             res.json({
                 perroS,
                 perroN,
                 gatoS,
                 gatoN,
-                //totalMascotaEste,
-                //totalMascotaNOEste
             });
             break;
         case 'Esquema de vacunación':
@@ -107,16 +80,11 @@ const getDatas = async (req, res = response) => {
             const gatoSi = await Mascota.find({ especie: 'Gato', comuna: comuna, vacunacion: 'Si' }).countDocuments();
             const gatoNo = await Mascota.find({ especie: 'Gato', comuna: comuna, vacunacion: 'No' }).countDocuments();
 
-            const totalMascotaVacuna = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({vacunacion: 'Si'}).countDocuments();
-            const totalMascotaNOVacuna = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({vacunacion: 'No'}).countDocuments();
-
             res.json({
                 perroSi,
                 perroNo,
                 gatoSi,
                 gatoNo,
-                //totalMascotaVacuna,
-                //totalMascotaNOVacuna
 
             });
             break;
@@ -130,10 +98,6 @@ const getDatas = async (req, res = response) => {
             const gatoP = await Mascota.find({ especie: 'Gato', comuna: comuna, estado: 'Perdido' }).countDocuments();
             const gatoAd = await Mascota.find({ especie: 'Gato', comuna: comuna, estado: 'En Adopción' }).countDocuments();
 
-            const totalMascotaVivas = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({estado: 'Vivo' }).countDocuments();
-            const totalMascotaMuertas = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({estado: 'Muerto' }).countDocuments();
-            const totalMascotaperdidas = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({estado: 'Perdido' }).countDocuments();
-            const totalMascotaEnAdopcion = await Mascota.find({ especie: { $in: ['Perro', 'Gato'] },  comuna: comuna, }).where({estado: 'En Adopción' }).countDocuments();
             res.json({
                 perroV,
                 perroF,
@@ -143,7 +107,6 @@ const getDatas = async (req, res = response) => {
                 gatoF,
                 gatoP,
                 gatoAd,
-                //totalMascotaVivas,totalMascotaMuertas,totalMascotaperdidas,totalMascotaEnAdopcion
             });
             break;
         default:
@@ -275,7 +238,7 @@ const getData = async (req, res = response) => {
             break;
 
         default:
-            console.log(`Sorry, we are out of ${consulta}.`);
+            console.log(`Error ${consulta}.`);
     }
 }
 module.exports = {

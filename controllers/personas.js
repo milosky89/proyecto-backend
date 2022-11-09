@@ -99,9 +99,6 @@ const creandoPersona = async(req,res = response) => {
 
 //-------------------------------------------
 
-//toDO: validar token y comprobar si es el usuario correcto
-
-
 const actualizarPersona = async (req, res= response) => {
 
     const uid = req.params.id;
@@ -162,7 +159,6 @@ const borrarPersona = async(req, res= response) => {
                 msg: 'No existe un usuario con ese id'
             });
         }
-
         await Persona.findByIdAndDelete(uid);
         
         res.json({
@@ -178,8 +174,6 @@ const borrarPersona = async(req, res= response) => {
         })
     }
 }
-
-
 //------------------------------------------
 module.exports = {
     getPersonas,

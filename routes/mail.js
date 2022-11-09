@@ -35,7 +35,6 @@ app.post('/cambiarPassword', (req, res) => {
         }
  
         if (personaDB) {
-            // AQUI COLOCAS EL RESTANTE DEL CODIGO PARA EL ENVIO DEL CORREO
              //Generar Token
     const token = jwt.sign({ to }, process.env.JWT_SECRET, { expiresIn: 1800 }); //30 min
  

@@ -1,11 +1,6 @@
 const { response, json } = require('express');
-const bcrypt = require('bcryptjs');
-
 const Mascotas = require('../models/mascota');
 const { generarJWT } = require('../helpers/jwt');
-
-
-
 
 //---------------------------------------------
 const getMascotas = async (req, res) => {
@@ -47,9 +42,6 @@ const mascotasId = async (req, res) => {
         mascota
     });
 }
-
-
-
 
 //--------------------------------------------
 
@@ -128,7 +120,6 @@ const actualizarMascota = async (req, res = response) => {
 
         const mascotaActualizado = await Mascotas.findByIdAndUpdate(id, cambiosMascota, { new: true });
 
-
         res.json({
             ok: true,
             Mascota: mascotaActualizado
@@ -141,8 +132,6 @@ const actualizarMascota = async (req, res = response) => {
             msg: 'Error inesperado.. revisar log'
         })
     }
-
-
 }
 //--------------------------------------------
 
@@ -174,7 +163,6 @@ const eliminarMascota = async (req, res) => {
             msg: 'Error inesperado.. revisar log'
         })
     }
-
 }
 
 
