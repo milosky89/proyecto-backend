@@ -93,7 +93,7 @@ const getDatas = async (req, res = response) => {
             const perroF = await Mascota.find({ especie: 'Perro', comuna: comuna, estado: 'Muerto' }).countDocuments();
             const perroP = await Mascota.find({ especie: 'Perro', comuna: comuna, estado: 'Perdido' }).countDocuments();
             const perroAd = await Mascota.find({ especie: 'Perro', comuna:comuna, estado: 'En Adopción' }).countDocuments();
-            const gatoV = await Mascota.find({ especie: 'Gato', comuna: comuna, estado: 'vivo' }).countDocuments();
+            const gatoV = await Mascota.find({ especie: 'Gato', comuna: comuna, estado: 'Vivo' }).countDocuments();
             const gatoF = await Mascota.find({ especie: 'Gato', comuna: comuna, estado: 'Muerto' }).countDocuments();
             const gatoP = await Mascota.find({ especie: 'Gato', comuna: comuna, estado: 'Perdido' }).countDocuments();
             const gatoAd = await Mascota.find({ especie: 'Gato', comuna: comuna, estado: 'En Adopción' }).countDocuments();
